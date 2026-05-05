@@ -22,20 +22,26 @@ class _AtividadeViewState extends State<AtividadeView> {
     final concluidas = controller.atividades.where((a) => a.concluida).toList();
 
     return Scaffold(
-      appBar:AppBar(
-        backgroundColor: Colors.green[100], // Fundo suave como no protótipo
+       appBar: AppBar(
+        backgroundColor: const Color.fromARGB(255, 200, 230, 201),
+        elevation: 0,
         title: Row(
           children: [
             Image.asset('assets/images/logo.png', height: 40),
             const SizedBox(width: 10),
-            const Text("FitLife", style: TextStyle(color: Colors.black)),
+            const Text("FitLife", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
           ],
         ),
         actions: [
-          IconButton(icon: const Icon(Icons.wb_sunny_outlined, color: Colors.black), onPressed: () {}),
-          IconButton(icon: const Icon(Icons.menu, color: Colors.black), onPressed: () {
-            Scaffold.of(context).openDrawer(); // Abre o menu lateral
-          }),
+          const Icon(Icons.wb_sunny_outlined, color: Colors.black),
+          const SizedBox(width: 15),
+          Builder(
+            builder: (context) => IconButton(
+              icon: const Icon(Icons.menu, color: Colors.black),
+              onPressed: () => Scaffold.of(context).openDrawer(),
+            ),
+          ),
+          const SizedBox(width: 10),
         ],
       ),
       body: Padding(
@@ -60,6 +66,7 @@ class _AtividadeViewState extends State<AtividadeView> {
               ),
             ),
             const SizedBox(height: 20),
+            
 
             // Parte: Atividades Pendentes
             const Text("Atividades Pendentes", style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
