@@ -17,10 +17,6 @@ class LoginView extends StatelessWidget {
             const Text("FitLife", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
           ],
         ),
-        actions: [
-          const Icon(Icons.wb_sunny_outlined, color: Colors.black),
-          const SizedBox(width: 10),
-        ],
       ),
       body: Container(
         padding: const EdgeInsets.all(30),

@@ -80,5 +80,13 @@ int get totalAtividadesPendentes => _atividades.where((atividade)=>!atividade.co
     return (totalAtividadesConcluidas * 80) + caloriasPorPassos;
   }
 
+  bool _isDarkMode = false;
+  bool get isDarkMode => _isDarkMode;
+
+  void toggleTheme() {
+    _isDarkMode = !_isDarkMode;
+    notifyListeners(); // Isso vai avisar o MaterialApp para mudar a cor
+  }
+
 }
 
