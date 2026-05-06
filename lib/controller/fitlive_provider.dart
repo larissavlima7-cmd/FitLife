@@ -27,7 +27,7 @@ class FitliveProvider extends ChangeNotifier {
   //Para apagar um exercício
   void deleteAtividade(int index){
     _atividades.removeAt(index);
-    notifyListeners(); //avisa que não exite mais esse exercício
+    notifyListeners(); //avisa que não existe mais esse exercício
   }
 
   //métodos para as métricas
@@ -80,6 +80,7 @@ int get totalAtividadesPendentes => _atividades.where((atividade)=>!atividade.co
     return (totalAtividadesConcluidas * 80) + caloriasPorPassos;
   }
 
+//mudando o tema claro/escuro
   bool _isDarkMode = false;
   bool get isDarkMode => _isDarkMode;
 

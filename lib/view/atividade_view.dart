@@ -12,13 +12,14 @@ class AtividadeView extends StatefulWidget {
 }
 
 class _AtividadeViewState extends State<AtividadeView> {
+  //controle para quando adicionar uma nova atividade/exercício
   final TextEditingController _atividadeInput = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    // Usamos watch para reagir a mudanças no tema e na lista
+    //Vê as mudanças do provider para atualizar a lista e o tema
     final provider = context.watch<FitliveProvider>();
-
+// filtra para separar as concluidas das pendentes
     final pendentes = provider.atividades.where((a) => !a.concluida).toList();
     final concluidas = provider.atividades.where((a) => a.concluida).toList();
 
@@ -41,6 +42,7 @@ class _AtividadeViewState extends State<AtividadeView> {
         ),
         actions: [
           IconButton(
+            //icone para alterar o modo para claro/escuro
             icon: Icon(provider.isDarkMode ? Icons.wb_sunny : Icons.nightlight_round),
             color: provider.isDarkMode ? Colors.yellow : Colors.black,
             onPressed: () => provider.toggleTheme(),
@@ -49,7 +51,7 @@ class _AtividadeViewState extends State<AtividadeView> {
         ],
       ),
 
-      // O MESMO DRAWER DA DASHBOARD
+      // Drawer com os atalhos para as outras páginas
       drawer: Drawer(
         child: ListView(
           padding: EdgeInsets.zero,
@@ -58,6 +60,7 @@ class _AtividadeViewState extends State<AtividadeView> {
               decoration: BoxDecoration(color: Color.fromARGB(255, 84, 172, 12)),
               child: Text('Menu FitLife', style: TextStyle(color: Colors.white, fontSize: 24)),
             ),
+            //atalho do dashboard
             ListTile(
               leading: const Icon(Icons.dashboard),
               title: const Text('Dashboard'),
@@ -68,12 +71,15 @@ class _AtividadeViewState extends State<AtividadeView> {
                 );
               },
             ),
+            //atalho das atividades
             ListTile(
               leading: const Icon(Icons.fitness_center),
               title: const Text('Atividades'),
               onTap: () => Navigator.pop(context),
             ),
+            //linha que divide para deixar mais organizado
             const Divider(),
+            //forma de sair e voltra para a página de login
             ListTile(
               leading: const Icon(Icons.exit_to_app, color: Colors.red),
               title: const Text('Sair', style: TextStyle(color: Colors.red)),
@@ -95,6 +101,7 @@ class _AtividadeViewState extends State<AtividadeView> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
+            //adicionar a caixa de texto para adição de novos exeercícios
             TextField(
               controller: _atividadeInput,
               style: TextStyle(color: provider.isDarkMode ? Colors.white : Colors.black),
@@ -102,6 +109,7 @@ class _AtividadeViewState extends State<AtividadeView> {
                 labelText: "Adicionar novo exercício...",
                 labelStyle: TextStyle(color: provider.isDarkMode ? Colors.white70 : Colors.black54),
                 border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
+                //icone que possui a função de adicionar as atividades
                 suffixIcon: IconButton(
                   icon: const Icon(Icons.add_circle, color: Colors.green, size: 30),
                   onPressed: () {
@@ -114,6 +122,7 @@ class _AtividadeViewState extends State<AtividadeView> {
               ),
             ),
             const SizedBox(height: 20),
+            //bloco para os exercícios que ainda não foram feitos
             Text(
               "Pendentes",
               style: TextStyle(
@@ -127,7 +136,9 @@ class _AtividadeViewState extends State<AtividadeView> {
                   ? const Center(child: Text("Nada pendente!"))
                   : _buildLista(pendentes, provider),
             ),
+            //linha para ficar mais organizado
             const Divider(),
+          //bloco para as atividades que já foram feitas
             Text(
               "Concluídas",
               style: TextStyle(
@@ -144,7 +155,7 @@ class _AtividadeViewState extends State<AtividadeView> {
           ],
         ),
       ),
-
+    //bottom navigation para a moviemntação entre as páginas
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: 1, // Indica que estamos na aba Atividades
         selectedItemColor: const Color.fromARGB(255, 84, 172, 12),
@@ -165,7 +176,7 @@ class _AtividadeViewState extends State<AtividadeView> {
       ),
     );
   }
-
+//metodo para montar os exercícios em lista
   Widget _buildLista(List lista, FitliveProvider provider) {
     return ListView.builder(
       itemCount: lista.length,
@@ -180,11 +191,13 @@ class _AtividadeViewState extends State<AtividadeView> {
           margin: const EdgeInsets.symmetric(vertical: 6),
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           child: ListTile(
+            // Checkbox para alternar o estado de conclusão no Provider
             leading: Checkbox(
               value: atividade.concluida,
               activeColor: Colors.green,
               onChanged: (_) => provider.updateAtividade(indexOriginal),
             ),
+            // Nome da atividade com efeito "riscado" se estiver concluída
             title: Text(
               atividade.nome,
               style: TextStyle(
@@ -194,6 +207,7 @@ class _AtividadeViewState extends State<AtividadeView> {
                     : (provider.isDarkMode ? Colors.white : Colors.black),
               ),
             ),
+            //Botão que exclui as atividades permanentemente
             trailing: IconButton(
               icon: const Icon(Icons.delete_outline, color: Colors.red),
               onPressed: () => provider.deleteAtividade(indexOriginal),

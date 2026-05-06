@@ -9,16 +9,17 @@ class DashboardView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Usamos watch para a tela atualizar assim que clicar no sol/lua
+    //Vê as mudanças do provider para atualizar a tela
     final provider = context.watch<FitliveProvider>();
 
     return Scaffold(
-      // Removido o backgroundColor fixo para respeitar o tema global
+      //app bar com o logo, drawer e a função de mudar o tema
       appBar: AppBar(
         backgroundColor: provider.isDarkMode ? Colors.black54 : const Color.fromARGB(255, 200, 230, 201),
         elevation: 0,
         title: Row(
           children: [
+            //logo
             Image.asset('assets/images/logo.png', height: 40),
             const SizedBox(width: 10),
             Text(
@@ -31,6 +32,7 @@ class DashboardView extends StatelessWidget {
           ],
         ),
         actions: [
+          //icone para a função de mudar o tema claro/escuro
           IconButton(
             icon: Icon(provider.isDarkMode ? Icons.wb_sunny : Icons.nightlight_round),
             color: provider.isDarkMode ? Colors.yellow : Colors.black,
@@ -39,7 +41,8 @@ class DashboardView extends StatelessWidget {
           const SizedBox(width: 10),
         ],
       ),
-
+ //cria um menu lateral com atalhos para as página e para voltar a página de login
+ //adiciona sozinho o icone de menu
       drawer: Drawer(
   child: ListView(
     padding: EdgeInsets.zero,
@@ -53,7 +56,7 @@ class DashboardView extends StatelessWidget {
         ),
       ),
 
-      // 1. DASHBOARD
+      //colocando o atalho para o dashboard no drawer
       ListTile(
         leading: const Icon(Icons.dashboard),
         title: const Text('Dashboard'),
@@ -62,7 +65,7 @@ class DashboardView extends StatelessWidget {
         },
       ),
 
-      // 2. ATIVIDADES
+      // atalho para atividades no drawer
       ListTile(
         leading: const Icon(Icons.fitness_center),
         title: const Text('Atividades'),
@@ -73,10 +76,10 @@ class DashboardView extends StatelessWidget {
           );
         },
       ),
-
+// uma linha para deixar mais organizado
       const Divider(), // Linha separadora para o Sair
 
-      // 3. SAIR
+      //Para o usuário sair da parte interna do app
       ListTile(
         leading: const Icon(Icons.exit_to_app, color: Colors.red),
         title: const Text('Sair', style: TextStyle(color: Colors.red)),
@@ -92,9 +95,9 @@ class DashboardView extends StatelessWidget {
     ],
   ),
 ),
-
+ //organização das informações do Dashboard
       body: Container(
-        // Faz o fundo da lista mudar automaticamente entre branco e preto/cinza
+        // Faz o fundo da lista mudar automaticamente entre branco e preto
         color: Theme.of(context).scaffoldBackgroundColor,
         child: ListView(
           padding: const EdgeInsets.all(20),
@@ -106,6 +109,7 @@ class DashboardView extends StatelessWidget {
                 children: [
                   _tituloBloco("Relatório", provider),
                   const SizedBox(height: 10),
+                  //puxa as informações do provider
                   _textoMetrica("Calorias: ${provider.caloriasEstimadas} kcal", provider),
                   _textoMetrica("Tempo Total: ${provider.tempoTotalTreino}", provider),
                   _textoMetrica("Meta: ${(provider.metaSemanal * 100).toStringAsFixed(0)}%", provider),
@@ -123,6 +127,7 @@ class DashboardView extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
+                       //puxa as informações do provide
                       _quadradoEscuro("${provider.passosDados}\npassos"),
                       _quadradoEscuro("${provider.caloriasPorPassos.toStringAsFixed(0)}\nkcal"),
                     ],
@@ -131,6 +136,7 @@ class DashboardView extends StatelessWidget {
               ),
             ),
 
+          //bloco visual para as atividades já praticadas
             _buildContainer(
               provider: provider,
               child: Column(
@@ -152,6 +158,7 @@ class DashboardView extends StatelessWidget {
         ),
       ),
       
+      //barra de tarefas para acesso entre páginas
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: 0,
         selectedItemColor: const Color.fromARGB(255, 84, 172, 12),
@@ -173,7 +180,7 @@ class DashboardView extends StatelessWidget {
     );
   }
 
-  // MÉTODOS AUXILIARES CORRIGIDOS
+  //métodos para estilização
 
   Widget _buildContainer({required Widget child, required FitliveProvider provider}) {
     return Container(
