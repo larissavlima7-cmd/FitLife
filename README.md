@@ -15,6 +15,7 @@ Gestão de Exercícios: Criação, atualização (conclusão) e exclusão de ati
 ## 3. Requisitos Específicos 
 ### 3.1 Requisitos Funcionais (RF)
 | ID | Requisito | Descrição |
+| - | - | - | 
 | RF01 | Autenticação | O sistema deve validar as credenciais do usuário na LoginView para permitir acesso ao Dashboard. |
 | RF02 | Cálculo de Metas | O sistema deve calcular o progresso semanal baseado em uma meta fixa de 7 exercícios concluídos. |
 | RF03 | Persistência de Estado | O FitliveProvider deve notificar a interface (notifyListeners) sempre que houver alteração na lista de atividades ou passos. |
@@ -24,6 +25,7 @@ Gestão de Exercícios: Criação, atualização (conclusão) e exclusão de ati
 ### 3.2 Requisitos Não Funcionais (RNF)
 
 | ID | Categoria | Descrição | 
+| - | - | - |
 | RNF01 | Usabilidade | O sistema deve suportar Modo Escuro para conforto visual em ambientes de baixa luminosidade. | 
 | RNF02 | Performance | O cálculo das calorias totais gerais (atividades + passos) deve ser realizado em tempo real via getters no Provider. |
 | RNF03 | Portabilidade | Desenvolvido em Flutter, o sistema deve ser compatível com Android e iOS. |
