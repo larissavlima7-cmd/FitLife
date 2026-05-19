@@ -8,5 +8,5 @@ class Atividade {
 
   //required = torna a informação obrigatória, ele não pode adicionar uma atividade sem nome
   Atividade({required this.nome, this.concluida = false, DateTime? criadaEm}): criadaEm = criadaEm ?? DateTime.now();
-  // se ao criar não existir (??) uma carimbo de data e hora é criado um 
+  // se ao criar não existir uma carimbo de data e hora é criado um 
 }

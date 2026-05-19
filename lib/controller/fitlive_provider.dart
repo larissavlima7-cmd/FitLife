@@ -27,7 +27,7 @@ class FitliveProvider extends ChangeNotifier {
   //Para apagar um exercício
   void deleteAtividade(int index){
     _atividades.removeAt(index);
-    notifyListeners(); //avisa que não exite mais esse exercício
+    notifyListeners(); //avisa que não existe mais esse exercício
   }
 
   //métodos para as métricas
@@ -78,6 +78,15 @@ int get totalAtividadesPendentes => _atividades.where((atividade)=>!atividade.co
   double get caloriasTotaisGerais {
     // Pegamos os 80kcal por exercício concluído que já tínhamos + calorias dos passos
     return (totalAtividadesConcluidas * 80) + caloriasPorPassos;
+  }
+
+//mudando o tema claro/escuro
+  bool _isDarkMode = false;
+  bool get isDarkMode => _isDarkMode;
+
+  void toggleTheme() {
+    _isDarkMode = !_isDarkMode;
+    notifyListeners(); // Isso vai avisar o MaterialApp para mudar a cor
   }
 
 }

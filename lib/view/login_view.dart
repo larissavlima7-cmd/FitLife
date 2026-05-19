@@ -7,6 +7,7 @@ class LoginView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      //app bar com a logo, menu e troca de tema
        appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 200, 230, 201),
         elevation: 0,
@@ -17,11 +18,8 @@ class LoginView extends StatelessWidget {
             const Text("FitLife", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
           ],
         ),
-        actions: [
-          const Icon(Icons.wb_sunny_outlined, color: Colors.black),
-          const SizedBox(width: 10),
-        ],
       ),
+      //colocando as caixas de texto para a escrita das informações
       body: Container(
         padding: const EdgeInsets.all(30),
         child: Column(
@@ -33,6 +31,7 @@ class LoginView extends StatelessWidget {
             const SizedBox(height: 15),
             TextField(obscureText: true, decoration: InputDecoration(labelText: "Senha", border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)))),
             const SizedBox(height: 30),
+            //botão para prosseguir para a página de Dashboard
             ElevatedButton(
               onPressed: () => Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => const DashboardView())),
               style: ElevatedButton.styleFrom(backgroundColor:Colors.green[200], minimumSize: Size(double.infinity, 50), shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12))),
